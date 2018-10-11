@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Project1
 {
-    public class Storage
+    public class Storage : RoleProperties
     {
-
+        
         public void Add()
         {
 
