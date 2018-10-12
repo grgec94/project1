@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Project1
 {
-    public class CeoService : BaseService<CEORole>
+    public class CeoService : BaseService<CeoRole>
     {
-        public override void AddSpecific(CEORole item)
+        public override void AddSpecific(CeoRole item)
         {
-            CEORole model = new CEORole();
+           // CeoRole model = new CeoRole();
             Console.Write("CEOYears: ");
-            model.CeoYears = Console.ReadLine();
+            item.CeoYears = Console.ReadLine();
         }
 
         public override void Display()

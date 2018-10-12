@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Project1
 {
-    public class PmService : BaseService<PMRole>
+    public class PmService : BaseService<PmRole>
     {
-        public override void AddSpecific(PMRole item)
+        public override void AddSpecific(PmRole item)
         {
-           PMRole model = new PMRole();
+          // PmRole model = new PmRole();
             Console.Write("Projects: ");
-            model.Projects = Console.ReadLine();
+            item.Project = Console.ReadLine();
         }
 
         public override void Display()

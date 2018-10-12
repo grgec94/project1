@@ -6,7 +6,11 @@ namespace Project1
 {
     public abstract class BaseService<T> where T : RoleProperties, new()
     {
-        protected Storage storage = new Storage();
+        protected Storage Storage { get; private set;}
+        public BaseService()
+        {
+            Storage = new Storage();
+        }
         public void Add()
         {
             T model = new T();
@@ -23,8 +27,11 @@ namespace Project1
             model.Age = Console.ReadLine();
 
             AddSpecific(model);
+            Storage.Add(model);
         }
         public abstract void AddSpecific(T item);
         public abstract void Display();
     }
+   // public class SpecifiicClasName : BaseService<Model>
+
 }

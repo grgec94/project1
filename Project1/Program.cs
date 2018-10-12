@@ -25,11 +25,11 @@ namespace Project1
             Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List");
             Console.Write("Command: ");
         }
-        public STRRole stRole = new STRRole();
-        public DEVRole devRole = new DEVRole();
-        public CEORole ceoRole = new CEORole();
-        public DSNRRole dsnRole = new DSNRRole();
-        public PMRole pmRole = new PMRole();
-
+       /* public StrRole stRole = new StrRole();
+        public DevRole devRole = new DevRole();
+        public CeoRole ceoRole = new CeoRole();
+        public DsnrRole dsnRole = new DsnrRole();
+        public PmRole pmRole = new PmRole();
+        */
     } 
 }

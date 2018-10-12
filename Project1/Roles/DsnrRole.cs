@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Project1
 {
-    public class DSNRRole : RoleProperties
+    public class DsnrRole : RoleProperties
     {
-        public string Projects { get; set; }
+        public string Project { get; set; }
         public string CanDraw { get; set; }
     }
 }

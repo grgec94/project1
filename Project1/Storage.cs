@@ -13,11 +13,11 @@ namespace Project1
 
         }
 
-        public void Help(RoleProperties item)
+      /*  public void Help(RoleProperties item)
         {
 
         }
-
+        */
         public void Removep(RoleProperties item )
         {
 
@@ -28,11 +28,12 @@ namespace Project1
 
         }
 
-        public void List(RoleProperties item)
+        /*
+         public void List(RoleProperties item)
         {
 
         }
-
+        */
 
     }
 }

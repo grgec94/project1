@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Project1
 {
-    public class DsnrService : BaseService<DSNRRole>
+    public class DsnrService : BaseService<DsnrRole>
     {
-        public override void AddSpecific(DSNRRole item)
+        public override void AddSpecific(DsnrRole item)
         {
-            DSNRRole model = new DSNRRole();
+           // DsnrRole model = new DsnrRole();
             Console.Write("Project: ");
-            model.Project = Console.ReadLine();
+            item.Project = Console.ReadLine();
             Console.Write("CanDraw: ");
-            model.CanDraw = Console.ReadLine();
+            item.CanDraw = Console.ReadLine();
         }
 
         public override void Display()

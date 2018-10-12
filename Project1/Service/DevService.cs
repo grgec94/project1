@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Project1
 {
-    public class DevService : BaseService<DEVRole>
+    public class DevService : BaseService<DevRole>
     {
-        public override void AddSpecific(DEVRole item)
+        public override void AddSpecific(DevRole item)
         {
-            DEVRole model = new DEVRole();
+           // DevRole model = new DevRole();
             Console.Write("Projects: ");
-            model.Projects = Console.ReadLine();
+            item.Projects = Console.ReadLine();
             Console.Write("IsStudent: ");
-            model.IsStudents = Console.ReadLine();
+            item.IsStudent = Console.ReadLine();
         }
 
         public override void Display()
