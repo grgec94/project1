@@ -6,28 +6,29 @@ namespace Project1
 {
     public class Storage : RoleProperties
     {
-        
-        public void Add()
+        public List<RoleProperties> MojaList { get; set; }
+
+        public void Add(RoleProperties item)
         {
 
         }
 
-        public void Help()
+        public void Help(RoleProperties item)
         {
 
         }
 
-        public void Removep()
+        public void Removep(RoleProperties item )
         {
 
         }
 
-        public void Display()
+        public void Display(RoleProperties item)
         {
 
         }
 
-        public void List()
+        public void List(RoleProperties item)
         {
 
         }
