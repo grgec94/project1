@@ -7,6 +7,6 @@ namespace Project1
     public class StrRole : RoleProperties
     {
         public string Project { get; set; }
-        public string AutomatedTests { get; set; }
+        public bool AutomatedTests { get; set; }
     }
 }

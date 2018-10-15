@@ -7,7 +7,7 @@ namespace Project1
     public abstract class RoleProperties
     {
         public string Role { get; set; }
-        public string FrstName {get; set;}
+        public string FirstName {get; set;}
         public string LastName { get; set; }
         public string Age { get; set; }
     }

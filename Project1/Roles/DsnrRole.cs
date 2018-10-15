@@ -7,6 +7,6 @@ namespace Project1
     public class DsnrRole : RoleProperties
     {
         public string Project { get; set; }
-        public string CanDraw { get; set; }
+        public bool CanDraw { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Project1
     {
         public override void AddSpecific(PmRole item)
         {
-          // PmRole model = new PmRole();
+            item.Role = "pm";
             Console.Write("Projects: ");
             item.Project = Console.ReadLine();
         }

@@ -8,11 +8,11 @@ namespace Project1
     {
         public override void AddSpecific(DsnrRole item)
         {
-           // DsnrRole model = new DsnrRole();
+            item.Role = "dsnr";
             Console.Write("Project: ");
             item.Project = Console.ReadLine();
             Console.Write("CanDraw: ");
-            item.CanDraw = Console.ReadLine();
+            item.CanDraw = Convert.ToBoolean(Console.ReadLine());
         }
 
         public override void Display()
