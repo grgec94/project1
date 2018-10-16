@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Project1
@@ -21,6 +22,7 @@ namespace Project1
             }
             
         }
+        //private
         public List<RoleProperties> MyList = new List<RoleProperties>();
 
         public void Add(RoleProperties item)
@@ -30,25 +32,34 @@ namespace Project1
 
         public void Help(RoleProperties item)
         {
-            Console.WriteLine("Available commands: Add, Remove, Display, List, Help");
+            Console.WriteLine("Available commands: \n Add – used for adding new employee \n Remove – used for removing an existing employee \n" +
+                        " Display – used to display all employees(including you!) with their basic info\n  List – used to display all employees(excluding you!) with their basic infop");
         }
 
-        public void Removep(RoleProperties item )
+        public void Remove()
         {
+            Console.Write("Enter last name of employee you want to remove from list: ");
+            var removelastname = Console.ReadLine();
 
+            var remlastname = Storage.Instance.MyList.Where(roles => roles.LastName == removelastname).FirstOrDefault();
+            Storage.Instance.MyList.Remove(remlastname);
         }
 
-        public void Display(RoleProperties item)
+        public void Display()
         {
-
+            foreach (RoleProperties displaylist in Storage.Instance.MyList)
+            {
+                Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", displaylist.Role, displaylist.FirstName, displaylist.LastName, displaylist.Age);
+            }
         }
-
-        /*
-         public void List(RoleProperties item)
+        public void List()
         {
-
+            foreach (RoleProperties listItem in MyList.Where(item => item.Role != "ceo"))
+            {
+                Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", listItem.Role,
+                    listItem.FirstName, listItem.LastName, listItem.Age);
+            }
         }
-        */
 
     }
 }

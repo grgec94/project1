@@ -9,8 +9,8 @@ namespace Project1
         public override void AddSpecific(CeoRole item)
         {
             item.Role = "ceo";
-            Console.Write("CEOYears: ");
-            item.CeoYears = Convert.ToInt32(Console.ReadLine());
+            item.CeoYears = Helper.ParseUserInput("Ceo Years:");
+
         }
 
         public override void Display()

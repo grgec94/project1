@@ -11,8 +11,8 @@ namespace Project1
             item.Role = "dev";
             Console.Write("Projects: ");
             item.Projects = Console.ReadLine();
-            Console.Write("IsStudent: ");
-            item.IsStudent = Convert.ToBoolean(Console.ReadLine());
+           
+            item.IsStudent = Helper.ParseBoolInput("IsStudent:");
         }
 
         public override void Display()

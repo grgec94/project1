@@ -6,7 +6,7 @@ namespace Project1
 {
     public class CeoRole : RoleProperties
     {
-        public int CeoYears { get; set; }
+        public uint CeoYears { get; set; }
     }
 
 }

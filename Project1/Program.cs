@@ -26,7 +26,7 @@ namespace Project1
                     Console.Write("Role: ");
                     var role = Console.ReadLine();
 
-                    var ndceo = Storage.Instance.MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
+                   // var ndceo = Storage.Instance.MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
 
                     switch (role.ToLower())
                     {
@@ -43,7 +43,7 @@ namespace Project1
                         case "pm":
                             pmService.Add();
                             break;
-                        case "st":
+                        case "str":
                             stService.Add();
                             break;
                         case "dsn":
@@ -56,22 +56,16 @@ namespace Project1
                 }
                 else if (command.ToLower() == "help")
                 {
-                    Console.WriteLine("Available commands: Add, Remove, Display, List, Help");
+                    Console.WriteLine("Available commands: \n Add – used for adding new employee \n Remove – used for removing an existing employee \n" +
+                        " Display – used to display all employees(including you!) with their basic info\n  List – used to display all employees(excluding you!) with their basic infop");
                 }
                 else if (command.ToLower() == "remove")
                 {
-                    Console.Write("Enter last name of employee you want to remove from list: ");
-                    var removelastname = Console.ReadLine();
-
-                    var remlastname = Storage.Instance.MyList.Where(roles => roles.LastName == removelastname).FirstOrDefault();
-                    Storage.Instance.MyList.Remove(remlastname);
+                    Storage.Instance.Remove();
                 }
                 else if (command.ToLower() == "display")
                 {
-                    foreach (RoleProperties displaylist in Storage.Instance.MyList)
-                    {
-                     Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", displaylist.Role, displaylist.FirstName, displaylist.LastName, displaylist.Age);
-                    }
+                    Storage.Instance.Display();
                 }
             }
         }
