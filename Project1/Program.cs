@@ -17,21 +17,40 @@ namespace Project1
             Console.WriteLine("Available commands: Add, Remove, Display, List, Help");
             while (true)
             {
-                Console.Write("Command: ");
-
-                var command = Console.ReadLine();
-
-                if (command.ToLower() == "add")
+                string command;
+                do
                 {
-                    Console.Write("Role: ");
-                    var role = Console.ReadLine();
+                    Console.Write("Command: ");
+                    command = Console.ReadLine();
+                    if (command.ToLower() != "add" && command.ToLower() != "remove" && command.ToLower() != "display" && command.ToLower() != "list" && command.ToLower() != "help")
+                    {
+                        Console.WriteLine("Wrong input, try again.\n" +
+                            "Options: Add, Remove, Display, List, Help. ");
+                    }
 
-                   // var ndceo = Storage.Instance.MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
+                }
+                while (command.ToLower() != "add" && command.ToLower() != "remove" && command.ToLower() != "display" && command.ToLower() != "list" && command.ToLower() != "help");
+
+                string role;
+                if (command.ToLower() == "add")
+                {             
+                    do
+                    {
+                        Console.Write("Role: ");
+                        role = Console.ReadLine();
+
+                        if(role.ToLower() != "ceo" && role.ToLower() != "pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st")
+                        {
+                            Console.WriteLine("Wrong role, try again.\n" +
+                                "Options: Ceo, Dev, Dsnr, Pm, Str. ");
+                        }
+                    }
+                    while (role.ToLower() != "ceo" && role.ToLower() != "pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st");
 
                     switch (role.ToLower())
                     {
                         case "ceo":
-                            if (ndceo == null)
+                            if (Storage.Instance.CheckIfCeoExist() == false)
                             {
                                 ceoService.Add();
                             }
@@ -66,6 +85,10 @@ namespace Project1
                 else if (command.ToLower() == "display")
                 {
                     Storage.Instance.Display();
+                }
+                else if (command.ToLower() == "exit")
+                {
+                    return;
                 }
             }
         }

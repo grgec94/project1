@@ -23,7 +23,7 @@ namespace Project1
             
         }
         //private
-        public List<RoleProperties> MyList = new List<RoleProperties>();
+        private List<RoleProperties> MyList = new List<RoleProperties>();
 
         public void Add(RoleProperties item)
         {
@@ -60,6 +60,31 @@ namespace Project1
                     listItem.FirstName, listItem.LastName, listItem.Age);
             }
         }
+        public bool CheckIfCeoExist()
+        {
+            bool ceoExistance;
+            var ceoExistanceCheck = MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
+            if (ceoExistanceCheck == null)
+            {
+                ceoExistance = false;
+            }
+            else
+            {
+                ceoExistance = true;
+            }
+            return ceoExistance;
+        }
+        public void RoleNameList()
+        {
+            Console.Write("Enter role name of employees you want to display: ");
+            string roleName = Console.ReadLine();
 
+            foreach (RoleProperties roleNameListItem in MyList.Where(item => item.Role == roleName))
+            {
+                Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", roleNameListItem.Role,
+                    roleNameListItem.FirstName, roleNameListItem.LastName, roleNameListItem.Age);
+            }
+
+        }
     }
 }
