@@ -12,10 +12,24 @@ namespace Project1
             item.CeoYears = Helper.ParseUserInput("Ceo Years:");
 
         }
+            public bool CheckIfCeoExist(RoleProperties ceoExistanceCheck)
+            {
+            bool ceoExistance;
+                if (ceoExistanceCheck == null)
+                {
+                    ceoExistance = false;
+                }
+                else
+                {
+                    ceoExistance = true;
+                }
+                return ceoExistance;
+            }
 
+        
         public override void Display()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

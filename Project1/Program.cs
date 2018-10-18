@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Project1
 {
@@ -13,8 +15,9 @@ namespace Project1
             DsnrService dsnService = new DsnrService();
             DevService devService = new DevService();
 
-            
             Console.WriteLine("Available commands: Add, Remove, Display, List, Help");
+            CommonService commonService = new CommonService();
+
             while (true)
             {
                 string command;
@@ -50,7 +53,7 @@ namespace Project1
                     switch (role.ToLower())
                     {
                         case "ceo":
-                            if (Storage.Instance.CheckIfCeoExist() == false)
+                            if (ceoService.CheckIfCeoExist() == false)
                             {
                                 ceoService.Add();
                             }
@@ -78,19 +81,51 @@ namespace Project1
                     Console.WriteLine("Available commands: \n Add – used for adding new employee \n Remove – used for removing an existing employee \n" +
                         " Display – used to display all employees(including you!) with their basic info\n  List – used to display all employees(excluding you!) with their basic infop");
                 }
+
                 else if (command.ToLower() == "remove")
                 {
-                    Storage.Instance.Remove();
+                    Console.Write("Enter last name of employee you want to remove from list: ");
+                    var removelastname = Console.ReadLine();
+
+                    commonService.Remove(removelastname);
                 }
+
                 else if (command.ToLower() == "display")
                 {
-                    Storage.Instance.Display();
+                    //foreach (RoleProperties displaylist in Storage.Instance.MyList)
+                    //{
+                    //    Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", displaylist.Role, displaylist.FirstName, displaylist.LastName, displaylist.Age);
+                    //}
+                }
+
+                else if (command.ToLower() == "list")
+                {
+                    //foreach (RoleProperties listItem in MyList.Where(item => item.Role != "ceo"))
+                    //{
+                    //    Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", listItem.Role,
+                    //        listItem.FirstName, listItem.LastName, listItem.Age);
+                    //}
+
+                }
+
+                else if (command.ToLower() == "rolenameList")
+                {
+                    // Console.Write("Enter role name of employees you want to display: ");
+                    //string roleName = Console.ReadLine();
+
+                    //foreach (RoleProperties roleNameListItem in MyList.Where(item => item.Role == roleName))
+                    //{
+                    //Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", roleNameListItem.Role,
+                    //roleNameListItem.FirstName, roleNameListItem.LastName, roleNameListItem.Age);
+                    //}
+
                 }
                 else if (command.ToLower() == "exit")
                 {
                     return;
                 }
             }
+
         }
 
     } 
