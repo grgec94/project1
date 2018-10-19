@@ -37,17 +37,14 @@ namespace Project1
             MyList.Remove(MyList.Where(roles => roles.LastName == removeLastName).FirstOrDefault());
         }
 
-        public void Display()
+        public IEnumerable<RoleProperties> Find(string role)
         {
+            if(string.IsNullOrWhiteSpace(role))
+            {
+                return MyList.ToList();
+            }
 
-        }
-        public void List()
-        {
-        }
-        
-        public void RoleNameList()
-        {
-           
+            return MyList.Where(r => r.Role == role);
         }
     }
 }

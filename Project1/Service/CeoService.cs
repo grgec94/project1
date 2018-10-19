@@ -1,35 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Project1
 {
     public class CeoService : BaseService<CeoRole>
     {
-        public override void AddSpecific(CeoRole item)
+        public CeoService():base("ceo")
+        {
+        }
+
+        public override CeoRole Add()
+        {
+            var ceoList = Find();
+
+            if (ceoList.Count() == 0)
+            {
+                base.Add();
+            }
+            else
+            {
+                Console.WriteLine(" There is already CEO");
+            }
+        }
+
+        protected override AddSpecific(CeoRole item)
         {
             item.Role = "ceo";
             item.CeoYears = Helper.ParseUserInput("Ceo Years:");
-
         }
-            public bool CheckIfCeoExist(RoleProperties ceoExistanceCheck)
-            {
-            bool ceoExistance;
-                if (ceoExistanceCheck == null)
-                {
-                    ceoExistance = false;
-                }
-                else
-                {
-                    ceoExistance = true;
-                }
-                return ceoExistance;
-            }
+     
 
-        
-        public override void Display()
+        public override void DisplayList(IEnumerable<CeoRole> list)
         {
-            throw new NotImplementedException();
+            foreach (var item in list)
+            {
+                DisplaySingle(item);
+            }
+        }
+        protected override void DisplaySingle(CeoRole item)
+        {
+            Console.WriteLine($"{item.LastName} {item.FirstName}, {item.Age}, with {item.CeoYears} {(item.CeoYears <= 1 ? "year" : "years")} of experiance as CEO");
         }
     }
 }
