@@ -143,12 +143,21 @@ namespace Project1
             var employeeList = commonService.FindAll().ToArray();
             var result = employeeList.Where(ln => ln.LastName == lastName).ToArray();
 
-            for (int i = 0; i < result.Length; i++)
+            if (result != null && result.Any())
             {
-                Console.WriteLine($"#{i + 1}. {result[i].LastName} {result[i].FirstName} - {result[i].Roles}");
+                for (int i = 0; i < result.Length; i++)
+                {
+                    Console.WriteLine($"#{i + 1}. {result[i].LastName} {result[i].FirstName} - {result[i].Roles}");
+
+                }              
             }
 
-            return employeeList;
+            else
+            {
+                Console.WriteLine("Entered last name does not exist, type another");
+            }
+            return result;
+
         }
     }
 }
