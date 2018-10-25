@@ -1,46 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 
 namespace Project1
 {
     public class CeoService : BaseService<CeoRole>
     {
-        public CeoService():base("ceo")
+        public CeoService() : base(Common.Roles.Ceo)
         {
         }
 
         public override CeoRole Add()
         {
-            var ceoList = Find();
+            var existingCeo = Find();
 
-            if (ceoList.Count() == 0)
+            if (existingCeo != null && existingCeo.Any())
             {
-                base.Add();
+                Console.WriteLine("There can only be one CEO.");
             }
             else
             {
-                Console.WriteLine(" There is already CEO");
+                return base.Add();
             }
+
+            return existingCeo.First();
         }
 
-        protected override AddSpecific(CeoRole item)
+        protected override CeoRole AddSpecific(CeoRole model)
         {
-            item.Role = "ceo";
-            item.CeoYears = Helper.ParseUserInput("Ceo Years:");
-        }
-     
+            bool valid;
+            do
+            {
+                Console.WriteLine("How long are you a CEO(in years)?");
+                valid = Console.ReadLine().IsValidInt(out var ceoYears);
+                model.CeoYears = ceoYears;
+            } while (!valid);
 
-        public override void DisplayList(IEnumerable<CeoRole> list)
+            return model;
+        }
+
+        protected override void DisplayList(IEnumerable<CeoRole> list)
         {
             foreach (var item in list)
             {
                 DisplaySingle(item);
             }
         }
-        protected override void DisplaySingle(CeoRole item)
+
+        protected override void DisplaySingle(CeoRole model)
         {
-            Console.WriteLine($"{item.LastName} {item.FirstName}, {item.Age}, with {item.CeoYears} {(item.CeoYears <= 1 ? "year" : "years")} of experiance as CEO");
+            Console.WriteLine($"{model.Roles}: {model.LastName} {model.FirstName}, {model.Age}, with {model.CeoYears} {(model.CeoYears <= 1 ? "year" : "years")} of experiance as CEO");
         }
     }
 }

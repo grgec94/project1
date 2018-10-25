@@ -2,49 +2,59 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Project1
 {
-    public class Storage
+    public class EmployeeStorage
     {
-        protected static Storage instance;
-        private Storage()
-        {
+        private static EmployeeStorage instance;
 
+        private List<RoleProperties> Storage { get; set; }
+
+        private EmployeeStorage()
+        {
+            Storage = new List<RoleProperties>();
         }
 
-        public static Storage Instance
+        public static EmployeeStorage Instance => instance ?? (instance = new EmployeeStorage());
+
+        public RoleProperties Add(RoleProperties role)
         {
-            get
+            Storage.Add(role);
+
+            return role;
+        }
+
+        public IEnumerable<RoleProperties> Find(string roleName)
+        {
+            if (!string.IsNullOrEmpty(roleName))
             {
-                if (instance == null)
-                    instance = new Storage();
-                return instance;
+                return Storage.Where(e => e.Roles == roleName).ToList();
             }
 
-        }
-        private List<RoleProperties> MyList = new List<RoleProperties>();
-
-        public void Add(RoleProperties item)
-        {
-            MyList.Add(item);
+            return Storage.Where(e => e.Roles != Common.Roles.Ceo).ToList();
         }
 
-        public RoleProperties ceoExistanceCheck = Storage.Instance.MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
-
-        public void Remove(string removeLastName)
+        public IEnumerable<RoleProperties> FindAll()
         {
-            MyList.Remove(MyList.Where(roles => roles.LastName == removeLastName).FirstOrDefault());
+            return Storage.ToList();
         }
 
-        public IEnumerable<RoleProperties> Find(string role)
+        public RoleProperties Get(string Roles, string Role)
         {
-            if(string.IsNullOrWhiteSpace(role))
+            if (string.IsNullOrEmpty(Role))
             {
-                return MyList.ToList();
+                return Storage.FirstOrDefault(e => e.Roles == Role);
             }
 
-            return MyList.Where(r => r.Role == role);
+            return Storage.FirstOrDefault(e => e.Roles == Role);
+        }
+
+        public bool Remove(RoleProperties item)
+        {
+            return item != null && Storage.Remove(item);
         }
     }
 }
+ 

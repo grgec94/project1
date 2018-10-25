@@ -6,26 +6,21 @@ namespace Project1
 {
     public class CommonService : BaseService<RoleProperties>
     {
-
-        public CommonService(string role) : base(role)
+        public CommonService() : base(string.Empty)
         {
         }
 
-        public void FindAll()
+        public new IEnumerable<RoleProperties> FindAll()
         {
-
-        }
-        
-        public void Get()
-        {
-
-        }
-        public void Remove(string removeLastName)
-        {
-            Storage.Instance.Remove(removeLastName);
+            return base.FindAll();
         }
 
-        protected override RoleProperties AddSpecific(RoleProperties item)
+        public IEnumerable<RoleProperties> Find(string roleName)
+        {
+            return GetStorageInstance().Find(roleName);
+        }
+
+        protected override RoleProperties AddSpecific(RoleProperties model)
         {
             throw new NotImplementedException();
         }

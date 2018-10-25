@@ -1,125 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 namespace Project1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            CeoService ceoService = new CeoService();
-            StrService stService = new StrService();
-            PmService pmService = new PmService();
-            DsnrService dsnService = new DsnrService();
-            DevService devService = new DevService();
+            var service = new EmployeeService();
 
-            Console.WriteLine("Available commands: Add, Remove, Display, List, Help");
-            CommonService commonService = new CommonService();
+            HandleHelp();
 
             string command;
             do
             {
                 Console.Write("Command: ");
                 command = Console.ReadLine();
-                command = command.ToLower();
-                if (command != "add" + "remove" + "display" + "list" + "help")
+                command = command.ToUpper();
+                switch (command)
                 {
-                    Console.WriteLine("Wrong input, try again.\n" +
-                        "Options: Add, Remove, Display, List, Help. ");
-                }
-
-            }
-            while (command != "add" + "remove" + "display" + "list" + "help");
-
-            string role;
-            if (command == "add")
-            {
-                do
-                {
-                    Console.Write("Role: ");
-                    role = Console.ReadLine();
-                    role = role.ToLower();
-
-                    if (role != "ceo" + "pm" + "dev" + "dsn" + "st")
-                    {
-                        Console.WriteLine("Wrong role, try again.\n" +
-                            "Options: Ceo, Dev, Dsnr, Pm, Str. ");
-                    }
-                }
-                while (role != "ceo" + "pm" + "dev" + "dsn" + "st");
-
-                switch (role)
-                {
-                    case "ceo":
-                        ceoService.Add();
+                    case Commands.Add:
+                        service.HandleAdd();
                         break;
-                    case "pm":
-                        pmService.Add();
+                    case Commands.Remove:
+                        service.HandleRemove();
                         break;
-                    case "str":
-                        stService.Add();
+                    case Commands.Display:
+                        service.HandleDisplay();
                         break;
-                    case "dsn":
-                        dsnService.Add();
+                    case Commands.List:
+                        service.HandleList(null);
                         break;
-                    case "dev":
-                        devService.Add();
+                    case Commands.Ln:
+                        service.HandleLn();
+                         break;
+                    case Commands.CeoList:
+                    case Commands.PmList:
+                    case Commands.DevList:
+                    case Commands.DsnrList:
+                    case Commands.StrList:
+                        var role = command.Replace("LIST", "");
+                        service.HandleList(role);
+                        break;
+                    case Commands.Help:
+                        HandleHelp();
+                        break;
+                    case Commands.Exit:
+                        Console.WriteLine("Bye bye");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid command!");
+                        HandleHelp();
                         break;
                 }
-            }
-            else if (command.ToLower() == "help")
-            {
-                Console.WriteLine("Available commands: \n Add – used for adding new employee \n Remove – used for removing an existing employee \n" +
-                    " Display – used to display all employees(including you!) with their basic info\n  List – used to display all employees(excluding you!) with their basic infop");
-            }
-
-            else if (command.ToLower() == "remove")
-            {
-                Console.Write("Enter last name of employee you want to remove from list: ");
-                var removelastname = Console.ReadLine();
-
-                commonService.Remove(removelastname);
-            }
-
-            else if (command.ToLower() == "display")
-            {
-                foreach (RoleProperties displaylist in Storage.Instance.MyList)
-                {
-                    Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", displaylist.Role, displaylist.FirstName, displaylist.LastName, displaylist.Age);
-                }
-            }
-
-            else if (command.ToLower() == "list")
-            {
-                //foreach (RoleProperties listItem in MyList.Where(item => item.Role != "ceo"))
-                //{
-                //    Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", listItem.Role,
-                //        listItem.FirstName, listItem.LastName, listItem.Age);
-                //}
-
-            }
-
-            else if (command.ToLower() == "rolenameList")
-            {
-                // Console.Write("Enter role name of employees you want to display: ");
-                //string roleName = Console.ReadLine();
-
-                //foreach (RoleProperties roleNameListItem in MyList.Where(item => item.Role == roleName))
-                //{
-                //Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", roleNameListItem.Role,
-                //roleNameListItem.FirstName, roleNameListItem.LastName, roleNameListItem.Age);
-                //}
-
-            }
-            else if (command.ToLower() == "exit")
-            {
-                return;
-            }
+            } while (command != Commands.Exit);
         }
 
+        static void HandleHelp()
+        {
+            Console.WriteLine("Possible commands are:");
+            Console.WriteLine("-- Add");
+            Console.WriteLine("---- will route you to add a new employee");
+            Console.WriteLine("-- Remove");
+            Console.WriteLine("---- will route you to remove existing employee");
+            Console.WriteLine("-- Display");
+            Console.WriteLine("---- will display all employees including you");
+            Console.WriteLine("-- List");
+            Console.WriteLine("---- will display all employees excluding you");
+            Console.WriteLine("-- <role>List");
+            Console.WriteLine("---- will display role specific employees. Example: CeoList, PmList");
+        }
     }
-
-}
 }
